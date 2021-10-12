@@ -413,6 +413,11 @@
               <FileType>5</FileType>
               <FilePath>.\Include\MyTimer.h</FilePath>
             </File>
+            <File>
+              <FileName>Driver_Servo.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver_Servo.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -829,6 +834,11 @@
               <FileName>MyTimer.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\MyTimer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Driver_Servo.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver_Servo.h</FilePath>
             </File>
           </Files>
         </Group>

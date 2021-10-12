@@ -129,9 +129,9 @@ void MyTimer_PWM (TIM_TypeDef * Timer, char Channel){
 }
 
 
-void Rapport_Cyclique (TIM_TypeDef * Timer, uint32_t Pourcentage, char Channel){
+void Rapport_Cyclique (TIM_TypeDef * Timer, double Pourcentage, char Channel){
 	
-	int valeur = (Timer->ARR * Pourcentage) / 100 ;
+	int valeur = ((double)(Timer->ARR) * Pourcentage)/100.0 ;
 	
 	switch (Channel) {
 		
