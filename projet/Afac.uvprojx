@@ -398,6 +398,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\MyTimer.c</FilePath>
             </File>
+            <File>
+              <FileName>Driver_Servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Driver_Servo.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -416,7 +421,7 @@
             <File>
               <FileName>Driver_Servo.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Driver_Servo.h</FilePath>
+              <FilePath>.\Include\Driver_Servo.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -820,6 +825,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\MyTimer.c</FilePath>
             </File>
+            <File>
+              <FileName>Driver_Servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Driver_Servo.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -838,7 +848,7 @@
             <File>
               <FileName>Driver_Servo.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Driver_Servo.h</FilePath>
+              <FilePath>.\Include\Driver_Servo.h</FilePath>
             </File>
           </Files>
         </Group>

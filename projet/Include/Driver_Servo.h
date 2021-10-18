@@ -4,6 +4,9 @@
 #include "Driver_GPIO.h"
 #include "MyTimer.h"
 
+#define PWM_SERVO_ARR 60000
+#define PWM_SERVO_PSC 24
+
 /*
 **************************************************************************************************
 * @brief
@@ -20,12 +23,11 @@ void Servo_Init (MyTimer_Struct_TypeDef timPWM, MyGPIO_Struct_TypeDef pinServo, 
 * @brief
 * @param :
 	- MyTimer_Struct_TypeDef timPWM : Timer on which PWM is running
-	- int angle : angle between the longitudinal axe and the servo (0 to 180°)
+	- int angle : angle between the longitudinal axe and the servo (0 to 90°)
 	- char channel : channel of the PWM used
 * @Note : Servo_Init must have been launched
 **************************************************************************************************
 */
-void Servo_Set_Rotation (MyTimer_Struct_TypeDef timPWM, int angle, char channel);
-
+void Servo_Set_Angle (MyTimer_Struct_TypeDef timPWM, int angle, char channel);
 
 #endif
