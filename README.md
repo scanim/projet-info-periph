@@ -1,6 +1,10 @@
 # projet-info-periph
 
-# Membres
+GROUPE x
 
-0xACCO 
-Pourriez-vous me dire quel groupe et qui dans l'équipe SVP ?
+# Membres
+Jean VAN INGHELANDT
+Matthias RIFFARD
+Malik SEDIRA
+Robin SIMON
+Valentin GUERBETTE
