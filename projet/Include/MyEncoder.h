@@ -33,6 +33,8 @@ typedef struct
 //Initiating timer and GPIO
 void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_encoder);
 
+void MyEncoder_findZero(void);
+
 //Returns the encoder's timer counter
 short MyEncoder_getPosition(MyEncoder_Struct_TypeDef * struct_encoder);
 

@@ -3,6 +3,8 @@
 #include "stm32f10x.h"
 #include "MyEncoder.h"
 
+int initialized = 0; 
+
 void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_Encoder) {
 	
 	// On setup les ARR et PSC des deux compteurs A et B en format timer. Un seul timer nécessaire.
@@ -35,9 +37,12 @@ void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_Encoder) {
 	// so that an interrupt comming from the 20 lines can be properly acknowledged"
 	NVIC_EnableIRQ(EXTI4_IRQn);
 	
-	
-	
 }
+
+void MyEncoder_findZero(void) {
+	while (initialized!=1) {}
+}
+
 
 short MyEncoder_getPosition(MyEncoder_Struct_TypeDef * struct_encoder) {
 	return struct_encoder->struct_compteur_AB->Timer->CNT;
@@ -47,5 +52,6 @@ short MyEncoder_getPosition(MyEncoder_Struct_TypeDef * struct_encoder) {
 void EXTI4_IRQHandler(void) {
 	TIM2->CNT = 0; //reset counter
 	EXTI->PR |= ~(EXTI_PR_PR4); // release interrupt
+	initialized = 1 ;
 }
 

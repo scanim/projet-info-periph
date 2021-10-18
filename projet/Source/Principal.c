@@ -19,6 +19,7 @@ int main(void){
 	Encoder.struct_compteur_AB=&compteur_AB;
 	MyEncoder_Init(&Encoder);
 	
+	MyEncoder_findZero();
 	
 	do
 	{
