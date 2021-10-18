@@ -1,35 +1,7 @@
 #include "Driver_GPIO.h"
 #include "MyTimer.h"
 #include "stm32f10x.h"
-
-typedef struct{
-	MyGPIO_Struct_TypeDef * Encoder_I; // linked to external interrupt output and triggers counter reset RM 206
-	MyTimer_Struct_TypeDef * struct_compteur_AB;
-} MyEncoder_Struct_TypeDef;
-/*
-typedef struct {
-	TIM_TypeDef * Timer; // TIM1 à TIM4
-	unsigned short ARR;
-	unsigned short PSC;
-} MyTimer_Struct_TypeDef;
-
-typedef struct{
-	GPIO_TypeDef * GPIO ;
-	char GPIO_Pin ; //numero de 0 à 15
-	char GPIO_Conf ; // voir ci-dessous
-} MyGPIO_Struct_TypeDef;
-
-typedef struct
-{
-  __IO uint32_t IMR;
-  __IO uint32_t EMR;
-  __IO uint32_t RTSR;
-  __IO uint32_t FTSR;
-  __IO uint32_t SWIER;
-  __IO uint32_t PR;
-} EXTI_TypeDef;
-
-*/
+#include "MyEncoder.h"
 
 // pour configurer external interrupt, il faut que la PIN soit en mode input ?
 // https://stm32f4-discovery.net/2014/08/stm32f4-external-interrupts-tutorial/
@@ -53,7 +25,7 @@ void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_Encoder) {
 	
 	
 	// "Configure the mask bits of the 20 Interrupt lines" (RM 207)
-	EXTI->IMR = EXTI_IMR_MR1; //"Interrupt Mask on line 1" pas sur que c'est ce qu'il faut faire (je sais pas ce ue ça fait mais c'est logique).
+	//EXTI->IMR = EXTI_IMR_MR1; //"Interrupt Mask on line 1" pas sur que c'est ce qu'il faut faire (je sais pas ce ue ça fait mais c'est logique).
 	
 	// on configure dans quels cas ya l'interruption, ici quand ya un front montant ou descendant
 	EXTI->RTSR = EXTI_RTSR_TR1; // ça veut dire "si pin 1 a un "R"ising alors on trigger l'external interrupt 1
@@ -68,13 +40,16 @@ void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_Encoder) {
 	
 }
 
-int MyEncoder_getPosition(MyEncoder_Struct_TypeDef * struct_encoder) {
+short MyEncoder_getPosition(MyEncoder_Struct_TypeDef * struct_encoder) {
 	return struct_encoder->struct_compteur_AB->Timer->CNT;
 }
 
+int n = 0;
 // là c'est que pour les pin numérotés 1 à 4 sinon le nom et sous format différent et le handler aussi
+
 void EXTI1_IRQHandler(void) {
 	TIM2->CNT = 0; //reset counter
 	EXTI->PR &= ~(EXTI_PR_PR1); // release interrupt
+	n+=1;
 }
 
