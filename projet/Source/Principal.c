@@ -8,7 +8,7 @@
 int main(void){	
 	
 	MyEncoder_Struct_TypeDef Encoder;
-	MyGPIO_Struct_TypeDef GPIO_I = {GPIOA, 2, IN_PULLUP}; // configuration pas 100% certain
+	MyGPIO_Struct_TypeDef GPIO_I = {GPIOA, 4, IN_PULLUP}; // configuration pas 100% certain
 	MyTimer_Struct_TypeDef compteur_AB = {TIM2, 720, 1};
 	
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPCEN | RCC_APB2ENR_TIM1EN ;	
