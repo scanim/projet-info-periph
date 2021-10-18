@@ -17,7 +17,7 @@ typedef struct
 *****************************************************************************************
 * @brief
 * @param -> Paramètre sous forme d’une structure (son adresse) contenant les informations de base
-* @Note -> Fonction à lancer systématiquement avant d’aller plus en détail dans lesconf plus fines (PWM, codeur inc ... )
+* @Note -> Fonction à lancer systématiquement avant d’aller plus en détail dans les conf plus fines (PWM, codeur inc ... )
 *************************************************************************************************
 */
 
@@ -32,8 +32,6 @@ void MyTimer_Base_Init (MyTimer_Struct_TypeDef * Timer) ;
 * @param : - TIM_TypeDef * Timer : Timer concerne
 - char Prio : de 0 a 15
 * @Note : La fonction MyTimer_Base_Init doit avoir ete lancee au prealable
-Page 2 of 4
-Activité 2 : Utilisation des Timer et gestion des Interruptions
 **************************************************************************************************
 */
 void MyTimer_ActiveIT (TIM_TypeDef * Timer , char Prio, void (*IT_function) (void)) ;
@@ -47,6 +45,6 @@ void MyTimer_ActiveIT (TIM_TypeDef * Timer , char Prio, void (*IT_function) (voi
 */
 void MyTimer_PWM (TIM_TypeDef * Timer, char Channel) ;
 
-void Rapport_Cyclique (TIM_TypeDef * Timer, uint32_t Impul, char Channel) ;
+void PWM_Duty_Cycle (TIM_TypeDef * Timer, double Pourcentage, char Channel) ;
 
 #endif
