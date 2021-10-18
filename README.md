@@ -1,6 +1,7 @@
 # projet-info-periph
 
-GROUPE (╯°□°)╯︵ ┻━┻
+GROUPE (╯°□°)╯︵ ┻━┻    
+![alt text](orga12_10.png)   
 
 # Membres 
 
