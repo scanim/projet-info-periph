@@ -23,8 +23,8 @@ typedef struct
 
 void MyTimer_Base_Init (MyTimer_Struct_TypeDef * Timer) ;
 
-#define MyTimer_Base_Start(Timer) (Timer->Timer->CR1 |= (0x01))
-#define MyTimer_Base_Stop(Timer) (Timer->Timer->CR1 |= (0x00))
+#define MyTimer_Base_Start(TimerStruct) (TimerStruct->Timer->CR1 |= (0x01))
+#define MyTimer_Base_Stop(TimerStruct) (TimerStruct->Timer->CR1 |= (0x00))
 
 /*
 **************************************************************************************************

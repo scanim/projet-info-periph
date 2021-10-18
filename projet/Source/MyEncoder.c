@@ -1,7 +1,7 @@
-#include "MyGPIO.h"
+#include "Driver_GPIO.h"
 #include "MyTimer.h"
 #include "stm32f10x.h"
-#include "stm32f10x_exti.h"
+
 typedef struct{
 	MyGPIO_Struct_TypeDef * Encoder_I; // linked to external interrupt output and triggers counter reset RM 206
 	MyTimer_Struct_TypeDef * struct_compteur_AB;
@@ -40,46 +40,41 @@ void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_Encoder) {
 	MyTimer_Base_Init(struct_Encoder->struct_compteur_AB);
 	
 	//////// RM 391 Encoder Interface ////////
-	struct_Encoder->struct_compteur_AB->Timer->TIM_SMCR = TIM_SMCR_SMS_2; // peut aussi choisir 0 et 1.
+	struct_Encoder->struct_compteur_AB->Timer->SMCR = TIM_SMCR_SMS_1; // peut aussi choisir 0 et 1.
 	// on compte les transitions de TI1 et TI2 donc on choisit le mode 2.
 	// input filter ? polarity selection ?
 	// TI1 et TI2 c'est les deux input filter qui sont comptés par le Encoder mode. Correspondent aux TIMx_CH1 et TIMx_CH2 (RM 425).
 	
 	// Il faut enable le TIMER (bit CEN dans CR1)
-	MyTimer_Base_Start(struct_Encoder->struct_compteur_AB->Timer);
+	MyTimer_Base_Init(struct_Encoder->struct_compteur_AB);
 	
 	// Partie External Interrupt pour reset le counter
 	// Fait avec un seul pin et un seul gpio. On se décide et on le garde, pas possible de faire un switch (trop de cas).
 	
 	
 	// "Configure the mask bits of the 20 Interrupt lines" (RM 207)
-	EXTI1->IMR = EXTI_IMR_MR1; //"Interrupt Mask on line 1" pas sur que c'est ce qu'il faut faire (je sais pas ce ue ça fait mais c'est logique).
+	EXTI->IMR = EXTI_IMR_MR1; //"Interrupt Mask on line 1" pas sur que c'est ce qu'il faut faire (je sais pas ce ue ça fait mais c'est logique).
 	
 	// on configure dans quels cas ya l'interruption, ici quand ya un front montant ou descendant
-	EXTI1->RTSR = EXTI_RTSR_TR1; // ça veut dire "si pin 1 a un "R"ising alors on trigger l'external interrupt 1
-	EXTI1->FTSR = EXTI_FTSR_TR1; // ça veut dire "si pin 1 a un "F"alling alors on trigger l'external interrupt 1
+	EXTI->RTSR = EXTI_RTSR_TR1; // ça veut dire "si pin 1 a un "R"ising alors on trigger l'external interrupt 1
+	EXTI->FTSR = EXTI_FTSR_TR1; // ça veut dire "si pin 1 a un "F"alling alors on trigger l'external interrupt 1
 	
-	/ il faut encore déclarer la fonction "EXTI1_IRQHandler" au NVIC sinon ça va pas marcher
+	// il faut encore déclarer la fonction "EXTI1_IRQHandler" au NVIC sinon ça va pas marcher
 	// En RM ça veut dire "Configure the enable and mask bits that control the NVIC IRQ channel mapped to the External Interrupt Controller
 	// so that an interrupt comming from the 20 lines can be properly acknowledged"
-	NVIC_EnableIRQ(EXTI1_IRQHandler) ;
+	NVIC_EnableIRQ(EXTI1_IRQn) ;
 	
 	
 	
-	}
+}
+
+int MyEncoder_getPosition(MyEncoder_Struct_TypeDef * struct_encoder) {
+	return struct_encoder->struct_compteur_AB->Timer->CNT;
 }
 
 // là c'est que pour les pin numérotés 1 à 4 sinon le nom et sous format différent et le handler aussi
 void EXTI1_IRQHandler(void) {
 	TIM2->CNT = 0; //reset counter
-	TIM2->SR &= ~(TIM_SR_UIF); // release interrupt
+	EXTI->PR &= ~(EXTI_PR_PR1); // release interrupt
 }
 
-int main() {
-	
-	MyGPIO_Struct_TypeDef GPIO_I = {GPIOA, 7, In_PullUp}; // configuration pas 100% certain
-	MyTimer_Struct_TypeDef compteur_AB = {TIM1, 360, 0};
-	MyEncoder_Struct_TypeDef Encoder = {.Encoder_I=GPIO_I, .struct_compteur_AB=compteur_AB};
-	
-	
-}

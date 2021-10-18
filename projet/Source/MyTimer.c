@@ -8,13 +8,13 @@ void (*pFnc3) (void) ;
 void (*pFnc4) (void) ;
 
 
-void MyTimer_Base_Init (MyTimer_Struct_TypeDef * Timer){
+void MyTimer_Base_Init (MyTimer_Struct_TypeDef * TimerStruct){
 	
-	Timer->Timer->PSC = Timer->PSC - 1 ;
+	TimerStruct->Timer->PSC = TimerStruct->PSC - 1 ;
 	
-	Timer->Timer->ARR = Timer->ARR - 1 ;
+	TimerStruct->Timer->ARR = TimerStruct->ARR - 1 ;
 	
-	MyTimer_Base_Start (Timer) ;
+	MyTimer_Base_Start (TimerStruct) ;
 	
 }
 
