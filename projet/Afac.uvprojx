@@ -403,6 +403,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Driver_Servo.c</FilePath>
             </File>
+            <File>
+              <FileName>MyEncoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\MyEncoder.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -422,6 +427,11 @@
               <FileName>Driver_Servo.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\Driver_Servo.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyEncoder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\MyEncoder.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -830,6 +840,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Driver_Servo.c</FilePath>
             </File>
+            <File>
+              <FileName>MyEncoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\MyEncoder.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -849,6 +864,11 @@
               <FileName>Driver_Servo.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\Driver_Servo.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyEncoder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\MyEncoder.h</FilePath>
             </File>
           </Files>
         </Group>

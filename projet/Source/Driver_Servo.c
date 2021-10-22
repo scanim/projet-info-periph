@@ -9,7 +9,7 @@ void Servo_Init (MyTimer_Struct_TypeDef timPWM, MyGPIO_Struct_TypeDef pinServo, 
 
 void Servo_Set_Angle (MyTimer_Struct_TypeDef timPWM, int angle, char channel) {
 	if (angle >= 0 && angle <= 90) {
-		PWM_Duty_Cycle (timPWM.Timer, (double)(0.05 + (double)(angle)*0.05/90.0), channel) ;
+		Rapport_Cyclique (timPWM.Timer, (double)(0.05 + (double)(angle)*0.05/90.0), channel) ;
 	}
 }
 /*
