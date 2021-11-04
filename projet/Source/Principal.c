@@ -11,7 +11,7 @@ int main(void) {
 	
 	// Structures girouette
 	MyEncoder_Struct_TypeDef Encoder;
-	MyGPIO_Struct_TypeDef GPIO_I = {GPIOA, PINGIROUETTE, IN_PULLUP};
+	MyGPIO_Struct_TypeDef PIN_GIROUETTE;
 	MyTimer_Struct_TypeDef compteur_AB;
 	
 	// Structures Servo
@@ -34,6 +34,10 @@ int main(void) {
 	TIMER3.Timer = TIM3 ;
 	//TIM3 alternate function is linked to PA6
 	
+	// Init girouette
+	PIN_GIROUETTE.GPIO = GPIOA;
+	PIN_GIROUETTE.GPIO_Conf = IN_PULLUP;
+	PIN_GIROUETTE.GPIO_Pin = PINGIROUETTE;
 
 	compteur_AB.Timer = TIM2;
 	compteur_AB.ARR = 4*360; //on compte les quarts de degré donc on remet à 0 tous les 1440 tics
@@ -44,7 +48,7 @@ int main(void) {
 	Servo_Init (TIMER3, PIN_SERVO, CHANNELPWMSERVO);
 	Servo_Set_Angle(TIMER3, 0, CHANNELPWMSERVO);
 	
-	Encoder.Encoder_I=&GPIO_I;
+	Encoder.Encoder_I=&PIN_GIROUETTE;
 	Encoder.struct_compteur_AB=&compteur_AB;
 	MyEncoder_Init(&Encoder);
 	
