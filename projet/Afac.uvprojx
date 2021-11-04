@@ -408,6 +408,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\MyEncoder.c</FilePath>
             </File>
+            <File>
+              <FileName>Test_Bordage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Test_Bordage.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -844,6 +849,11 @@
               <FileName>MyEncoder.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\MyEncoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>Test_Bordage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Test_Bordage.c</FilePath>
             </File>
           </Files>
         </Group>

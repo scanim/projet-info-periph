@@ -40,17 +40,18 @@ void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_Encoder) {
 }
 
 void MyEncoder_findZero(void) {
-	while (initialized!=1) {}
+	while (initialized!=1);
+	TIM2->CNT = 0;
+	//initialized is set to 0 with an iterrupt when it goes through 0
 }
 
 
 short MyEncoder_getPosition(MyEncoder_Struct_TypeDef * struct_encoder) {
-	return struct_encoder->struct_compteur_AB->Timer->CNT;
+	return struct_encoder->struct_compteur_AB->Timer->CNT/4;
 }
 
 
 void EXTI4_IRQHandler(void) {
-	TIM2->CNT = 0; //reset counter
 	EXTI->PR |= ~(EXTI_PR_PR4); // release interrupt
 	initialized = 1 ;
 }

@@ -13,6 +13,7 @@
 * @param :
 	- MyTimer_Struct_TypeDef timPWM : Timer on which PWM will be executed
 	- MyGPIO_Struct_TypeDef pinServo : pin that will be linked to the servomotor
+	- char channel : channel of the PWM used
 * @Note : Init specified servo pin and PWM. TIMER IS NOT INITIALIZED
 **************************************************************************************************
 */
