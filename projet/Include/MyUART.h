@@ -3,7 +3,7 @@
 #include "stm32f10x.h"
 
 //Inits interrupt (reception) and starts background process (emission)
-void MyUART_Init(USART_TypeDef USART);
+void MyUART_Init(USART_TypeDef * USART, short Baud_Rate);
 
 //Sends a string
 void MyUART_Send(char * M);
