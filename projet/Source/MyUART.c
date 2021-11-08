@@ -8,7 +8,7 @@ void MyUART_Init(USART_TypeDef * USART, short Baud_Rate){
 
 	// Enable interrupt on RXNE event
 	USART->CR1 |= USART_CR1_RXNEIE;
-	// Enable USART2
+	// Enable USART
 	USART->CR1 |= USART_CR1_UE;
 	USART->CR1 |= USART_CR1_OVER8;
 	USART->BRR = Baud_Rate ; 
@@ -63,9 +63,4 @@ void USART3_IRQHandler(void){
 	n++ ; 
 }
 
-//int main(){
-//	MyUART_Init(USART1, 9600);
-//	while(1);
-//	return 0;
-//}
 
