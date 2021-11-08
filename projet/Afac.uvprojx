@@ -413,6 +413,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Test_Bordage.c</FilePath>
             </File>
+            <File>
+              <FileName>MyUART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\MyUART.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -437,6 +442,11 @@
               <FileName>MyEncoder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\MyEncoder.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyUART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\MyUART.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -855,6 +865,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Test_Bordage.c</FilePath>
             </File>
+            <File>
+              <FileName>MyUART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\MyUART.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -879,6 +894,11 @@
               <FileName>MyEncoder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\MyEncoder.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyUART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\MyUART.h</FilePath>
             </File>
           </Files>
         </Group>

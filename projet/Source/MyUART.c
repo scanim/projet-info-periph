@@ -2,19 +2,46 @@
 #include "stm32f10x.h"
 
 void MyUART_Init(USART_TypeDef * USART, short Baud_Rate){
+	
+	// Enable both Transmitter and Receiver
+	USART->CR1 |= USART_CR1_RE;
+
+	// Enable interrupt on RXNE event
+	USART->CR1 |= USART_CR1_RXNEIE;
+	// Enable USART2
+	USART->CR1 |= USART_CR1_UE;
+	USART->CR1 |= USART_CR1_OVER8;
 	USART->BRR = Baud_Rate ; 
 	
 	//RDR : Interrupt init
-	USART->CR1 |= USART_CR1_RXNEIE ;
+	//USART->CR1 |= USART_CR1_RXNEIE ;
 	
 	switch((int)USART) {
-		case (int)(USART1) : 
+		case (int)(USART1) :
+			
+			// Enable USART clock
+			RCC -> APB2ENR |= RCC_APB2ENR_USART1EN;
+
+			NVIC_SetPriority(USART1_IRQn, 1);
 			NVIC_EnableIRQ(USART1_IRQn);
 			break;
+		
 		case (int)(USART2) : 
+			// Enable USART clock
+			RCC -> APB1ENR |= RCC_APB1ENR_USART2EN;
+			
+
+			NVIC_SetPriority(USART2_IRQn, 1);
+			
 			NVIC_EnableIRQ(USART2_IRQn);
 			break;
+		
 		case (int)(USART3) : 
+			// Enable USART clock
+			RCC -> APB1ENR |= RCC_APB1ENR_USART3EN;
+
+			NVIC_SetPriority(USART3_IRQn, 1);
+			
 			NVIC_EnableIRQ(USART3_IRQn);
 			break;	
 	}

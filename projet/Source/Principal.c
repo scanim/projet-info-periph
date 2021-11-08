@@ -7,7 +7,7 @@
 #define PINGIROUETTE 4
 #define CHANNELPWMSERVO '1'
 
-int main(void) {	
+/*int main(void) {	
 	
 	// Structures girouette
 	MyEncoder_Struct_TypeDef Encoder;
@@ -69,4 +69,4 @@ int main(void) {
 			Servo_Set_Angle(TIMER3, 0.6666666667*(315-mesure), CHANNELPWMSERVO);
 		}
 	} while(1) ;
-}
+}*/
