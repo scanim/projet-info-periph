@@ -20,7 +20,11 @@ void Bordage_Init(MyTimer_Struct_TypeDef * timer, MyGPIO_Struct_TypeDef * pin_se
 	MyEncoder_Init(encoder);
 	
 	// On bloque tant que la girouette ne passe pas par 0
+<<<<<<< HEAD
 	//MyEncoder_findZero();
+=======
+	MyEncoder_findZero();
+>>>>>>> 2e6684cc66243fe25b01975e259562898acbdc3a
 	
 	// Initialisation des variables du handler
 	TIMER_PWM_SERVO = timer;
