@@ -1,11 +1,12 @@
 #include "stm32f10x.h"
 #include "MyTimer.h"
 #include "Driver_GPIO.h"
+#include "Bordage.h"
 
-void (*pFnc1) (void) ;
-void (*pFnc2) (void) ;
-void (*pFnc3) (void) ;
-void (*pFnc4) (void) ;
+void (*pHandlerTim1) (void) ;
+void (*pHandlerTim2) (void) ;
+void (*pHandlerTim3) (void) ;
+void (*pHandlerTim4) (void) ;
 
 
 void MyTimer_Base_Init (MyTimer_Struct_TypeDef * TimerStruct){
@@ -26,25 +27,25 @@ void MyTimer_ActiveIT (TIM_TypeDef * Timer , char Prio, void (*IT_function) (voi
 	switch ((uint32_t)Timer) {
 		
 		case TIM1_BASE:
-			pFnc1 = IT_function ;
+			pHandlerTim1 = IT_function ;
 			NVIC_EnableIRQ (TIM1_UP_IRQn ) ;
 			NVIC_SetPriority (TIM1_UP_IRQn , Prio) ;
 			break ;
 		
 		case TIM2_BASE:
-			pFnc2 = IT_function ;
+			pHandlerTim2 = IT_function ;
 			NVIC_EnableIRQ (TIM2_IRQn) ;
 			NVIC_SetPriority (TIM2_IRQn , Prio) ;
 			break ;
 		
 		case TIM3_BASE:
-			pFnc3= IT_function ;
+			pHandlerTim3= IT_function ;
 			NVIC_EnableIRQ (TIM3_IRQn) ;
 			NVIC_SetPriority (TIM3_IRQn , Prio) ;
 			break ;
 		
 		case TIM4_BASE:
-			pFnc4 = IT_function ;
+			pHandlerTim4 = IT_function ;
 			NVIC_EnableIRQ (TIM4_IRQn) ;
 			NVIC_SetPriority (TIM4_IRQn , Prio) ;
 			break ;
@@ -57,8 +58,8 @@ void TIM1_IRQHandler ( void ){
 	
 	TIM1->SR &= ~TIM_SR_UIF ;
 	
-	if (pFnc1 != 0){
-		(*pFnc1) (); /* appel indirect de la fonction */
+	if (pHandlerTim1 != 0){
+		(*pHandlerTim1) (); /* appel indirect de la fonction */
 	}
 	
 }
@@ -68,8 +69,8 @@ void TIM2_IRQHandler ( void ){
 	
 	TIM2->SR &= ~TIM_SR_UIF ;
 	
-	if (pFnc2 != 0){
-		(*pFnc2) (); /* appel indirect de la fonction */
+	if (pHandlerTim2 != 0){
+		(*pHandlerTim2) (); /* appel indirect de la fonction */
 	}
 	
 }
@@ -79,8 +80,8 @@ void TIM3_IRQHandler ( void ){
 	
 	TIM3->SR &= ~TIM_SR_UIF ;
 	
-	if (pFnc3 != 0){
-		(*pFnc3) (); /* appel indirect de la fonction */
+	if (pHandlerTim3 != 0){
+		(*pHandlerTim3) (); /* appel indirect de la fonction */
 	}
 	
 }
@@ -90,8 +91,8 @@ void TIM4_IRQHandler ( void ){
 	
 	TIM4->SR &= ~TIM_SR_UIF ;
 	
-	if (pFnc4 != 0){
-		(*pFnc4) (); /* appel indirect de la fonction */
+	if (pHandlerTim4 != 0){
+		(*pHandlerTim4) (); /* appel indirect de la fonction */
 	}
 
 }
