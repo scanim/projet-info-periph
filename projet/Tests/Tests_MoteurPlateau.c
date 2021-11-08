@@ -42,7 +42,7 @@ int main(void) {
 	
 	PWM_Duty_Cycle (TIM4, 0.2, '1') ;
 	
-	
+	MyGPIO_Reset (PIN_SENS.GPIO, 2) ;
 	
 	/*MyTimer_ActiveIT (TIMER1.Timer, 1, SpeedUpdate) ;
 	
@@ -59,8 +59,8 @@ int main(void) {
 	
 	do {
 		
-		for (i=0; i<10000000;i++){n++;}
-		MyGPIO_Toggle (PIN_SENS.GPIO, 2) ;
+		//for (i=0; i<10000000;i++){n++;}
+		
 		
 	} while(1) ;
 }
