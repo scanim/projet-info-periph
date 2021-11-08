@@ -413,6 +413,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\Bordage.c</FilePath>
             </File>
+            <File>
+              <FileName>MyUART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\MyUART.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -915,6 +920,11 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>MyUART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\MyUART.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,6 +1,6 @@
 Dependencies for Project 'Afac', Target 'Réel': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (.\Source\Principal.c)(0x6188E0F0)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\principal.o --omf_browse .\objects\principal.crf --depend .\objects\principal.d)
+F (.\Source\Principal.c)(0x6188F042)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\principal.o --omf_browse .\objects\principal.crf --depend .\objects\principal.d)
 I (C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58258CCC)
 I (.\RTE\_R_el\RTE_Components.h)(0x61839B0B)
 I (C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8F2582)
@@ -13,11 +13,7 @@ I (.\Include\Driver_GPIO.h)(0x6188D190)
 I (.\Include\MyTimer.h)(0x6183B9FE)
 I (.\Include\MyEncoder.h)(0x6188D240)
 I (.\Include\Driver_Servo.h)(0x6183AD5C)
-<<<<<<< HEAD
-I (.\Include\Bordage.h)(0x6188E6CF)
-=======
-I (.\Include\Bordage.h)(0x6188E108)
->>>>>>> 2e6684cc66243fe25b01975e259562898acbdc3a
+I (.\Include\Bordage.h)(0x6188F032)
 F (.\Source\Driver_GPIO.c)(0x61839B0B)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\driver_gpio.o --omf_browse .\objects\driver_gpio.crf --depend .\objects\driver_gpio.d)
 I (C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58258CCC)
 I (.\RTE\_R_el\RTE_Components.h)(0x61839B0B)
@@ -29,7 +25,7 @@ I (C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.
 I (C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58258CCC)
 I (.\Include\Driver_GPIO.h)(0x6188D190)
 I (.\Include\MyTimer.h)(0x6183B9FE)
-F (.\Source\MyTimer.c)(0x6188E095)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\mytimer.o --omf_browse .\objects\mytimer.crf --depend .\objects\mytimer.d)
+F (.\Source\MyTimer.c)(0x6188F010)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\mytimer.o --omf_browse .\objects\mytimer.crf --depend .\objects\mytimer.d)
 I (C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58258CCC)
 I (.\RTE\_R_el\RTE_Components.h)(0x61839B0B)
 I (C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8F2582)
@@ -40,11 +36,7 @@ I (C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.
 I (C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58258CCC)
 I (.\Include\MyTimer.h)(0x6183B9FE)
 I (.\Include\Driver_GPIO.h)(0x6188D190)
-<<<<<<< HEAD
-I (.\Include\Bordage.h)(0x6188E6CF)
-=======
-I (.\Include\Bordage.h)(0x6188E108)
->>>>>>> 2e6684cc66243fe25b01975e259562898acbdc3a
+I (.\Include\Bordage.h)(0x6188F032)
 I (.\Include\Driver_Servo.h)(0x6183AD5C)
 I (.\Include\MyEncoder.h)(0x6188D240)
 F (.\Source\Driver_Servo.c)(0x6183B9F9)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\driver_servo.o --omf_browse .\objects\driver_servo.crf --depend .\objects\driver_servo.d)
@@ -71,13 +63,8 @@ I (C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.
 I (C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58258CCC)
 I (.\Include\MyTimer.h)(0x6183B9FE)
 I (.\Include\MyEncoder.h)(0x6188D240)
-<<<<<<< HEAD
-F (.\Source\Bordage.c)(0x6188E380)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\bordage.o --omf_browse .\objects\bordage.crf --depend .\objects\bordage.d)
-I (.\Include\Bordage.h)(0x6188E6CF)
-=======
-F (.\Source\Bordage.c)(0x6188DB5E)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\bordage.o --omf_browse .\objects\bordage.crf --depend .\objects\bordage.d)
-I (.\Include\Bordage.h)(0x6188E108)
->>>>>>> 2e6684cc66243fe25b01975e259562898acbdc3a
+F (.\Source\Bordage.c)(0x6188F03C)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\bordage.o --omf_browse .\objects\bordage.crf --depend .\objects\bordage.d)
+I (.\Include\Bordage.h)(0x6188F032)
 I (C:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58258CCC)
 I (.\RTE\_R_el\RTE_Components.h)(0x61839B0B)
 I (C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8F2582)
@@ -95,11 +82,7 @@ F (.\Include\MyTimer.h)(0x6183B9FE)()
 F (.\Include\Driver_Servo.h)(0x6183AD5C)()
 F (.\Include\MyEncoder.h)(0x6188D240)()
 F (.\Include\MyUART.h)(0x6188D40D)()
-<<<<<<< HEAD
-F (.\Include\Bordage.h)(0x6188E6CF)()
-=======
-F (.\Include\Bordage.h)(0x6188E108)()
->>>>>>> 2e6684cc66243fe25b01975e259562898acbdc3a
+F (.\Include\Bordage.h)(0x6188F032)()
 F (RTE\Device\STM32F103RB\RTE_Device.h)(0x61839B0B)()
 F (RTE\Device\STM32F103RB\startup_stm32f10x_md.s)(0x6183B3BE)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include--pd "__UVISION_VERSION SETA 534" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_stm32f10x_md.lst --xref -o .\objects\startup_stm32f10x_md.o --depend .\objects\startup_stm32f10x_md.d)
 F (RTE\Device\STM32F103RB\system_stm32f10x.c)(0x61839B0B)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Include-I.\RTE\Device\STM32F103RB-I.\RTE\_R_el-IC:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32F10X_MD -D_RTE_-o .\objects\system_stm32f10x.o --omf_browse .\objects\system_stm32f10x.crf --depend .\objects\system_stm32f10x.d)

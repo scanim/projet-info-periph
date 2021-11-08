@@ -28,7 +28,7 @@ void MyTimer_ActiveIT (TIM_TypeDef * Timer , char Prio, void (*IT_function) (voi
 		
 		case TIM1_BASE:
 			pHandlerTim1 = IT_function ;
-			NVIC_EnableIRQ (TIM1_UP_IRQn ) ;
+			NVIC_EnableIRQ (TIM1_UP_IRQn) ;
 			NVIC_SetPriority (TIM1_UP_IRQn , Prio) ;
 			break ;
 		
@@ -54,7 +54,7 @@ void MyTimer_ActiveIT (TIM_TypeDef * Timer , char Prio, void (*IT_function) (voi
 }
 
 
-void TIM1_IRQHandler ( void ){
+void TIM1_UP_IRQHandler ( void ){
 	
 	TIM1->SR &= ~TIM_SR_UIF ;
 	
