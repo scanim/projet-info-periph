@@ -3,6 +3,9 @@
 
 void MyUART_Init(USART_TypeDef * USART, short Baud_Rate){
 	
+				
+	
+	
 	// Enable both Transmitter and Receiver
 	USART->CR1 |= USART_CR1_RE;
 
@@ -10,7 +13,6 @@ void MyUART_Init(USART_TypeDef * USART, short Baud_Rate){
 	USART->CR1 |= USART_CR1_RXNEIE;
 	// Enable USART
 	USART->CR1 |= USART_CR1_UE;
-	USART->CR1 |= USART_CR1_OVER8;
 	USART->BRR = Baud_Rate ; 
 	
 	//RDR : Interrupt init
@@ -18,17 +20,16 @@ void MyUART_Init(USART_TypeDef * USART, short Baud_Rate){
 	
 	switch((int)USART) {
 		case (int)(USART1) :
-			
-			// Enable USART clock
-			RCC -> APB2ENR |= RCC_APB2ENR_USART1EN;
+//			
+//			// Enable USART clock
+//			RCC -> APB2ENR |= RCC_APB2ENR_USART1EN;
 
 			NVIC_SetPriority(USART1_IRQn, 1);
 			NVIC_EnableIRQ(USART1_IRQn);
 			break;
 		
 		case (int)(USART2) : 
-			// Enable USART clock
-			RCC -> APB1ENR |= RCC_APB1ENR_USART2EN;
+
 			
 
 			NVIC_SetPriority(USART2_IRQn, 1);
@@ -37,9 +38,7 @@ void MyUART_Init(USART_TypeDef * USART, short Baud_Rate){
 			break;
 		
 		case (int)(USART3) : 
-			// Enable USART clock
-			RCC -> APB1ENR |= RCC_APB1ENR_USART3EN;
-
+			
 			NVIC_SetPriority(USART3_IRQn, 1);
 			
 			NVIC_EnableIRQ(USART3_IRQn);
@@ -62,5 +61,7 @@ void USART3_IRQHandler(void){
 	USART3->SR &= ~USART_SR_RXNE ;
 	n++ ; 
 }
+
+
 
 
