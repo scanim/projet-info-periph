@@ -50,24 +50,25 @@ int n = 0;
 char comp = 0;
 signed char comp_signed = 0;
 
-void USART1_IRQHandler(void){
-	USART1->SR &= ~USART_SR_RXNE ;
-	if(comp != USART1->DR){
+void gen_IRQHandler(USART_TypeDef * USART){
+	USART->SR &= ~USART_SR_RXNE ;
+	if(comp != USART->DR){
 		n++ ;
-		comp = USART1->DR ; 
+		comp = USART->DR ; 
 		comp_signed = (signed char)comp;
 	}
-	
+}
+
+void USART1_IRQHandler(void){
+	gen_IRQHandler(USART1);
 }
 
 void USART2_IRQHandler(void){
-	USART2->SR &= ~USART_SR_RXNE ;
-	n++ ; 
+	gen_IRQHandler(USART2); 
 }
 
 void USART3_IRQHandler(void){
-	USART3->SR &= ~USART_SR_RXNE ;
-	n++ ; 
+	gen_IRQHandler(USART3); 
 }
 
 void MyUART_Send(USART_TypeDef * USART, char * M, int len){

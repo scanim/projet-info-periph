@@ -12,7 +12,7 @@ typedef struct
 } MyGPIO_Struct_TypeDef ;
 
 #define IN_FLOATING 0x4
-#define IN_PULLDOWN 0x314
+#define IN_PULLDOWN 0x8
 #define IN_PULLUP 0x8
 #define IN_ANALOG 0x0
 #define OUT_PPULL 0x2
