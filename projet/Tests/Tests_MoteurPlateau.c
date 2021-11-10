@@ -47,14 +47,12 @@ int main(void) {
 	
 	MyTimer_PWM (TIMER4.Timer, '1') ;
 	
-	PWM_Duty_Cycle (TIM4, 0.3, '1') ;
 	
 	
 	
+	MyTimer_ActiveIT (TIMER1.Timer, 1, SpeedUpdate) ;
 	
-	/*MyTimer_ActiveIT (TIMER1.Timer, 1, SpeedUpdate) ;
-	
-	MyTimer_Base_Init (&TIMER1) ;*/ // POUR LE CALLBACK (CHANGER LE TIMER)
+	MyTimer_Base_Init (&TIMER1) ;
 	
 	
 	
