@@ -30,9 +30,9 @@ int main(void) {
 	BROCHE_PWM.GPIO_Conf = ALTOUT_PPULL ;
 	BROCHE_PWM.GPIO_Pin = 6 ;
 	
-	PIN_SENS.GPIO = GPIOA ;
+	PIN_SENS.GPIO = GPIOB ;
 	PIN_SENS.GPIO_Conf = OUT_PPULL ;
-	PIN_SENS.GPIO_Pin = 2 ;
+	PIN_SENS.GPIO_Pin = 5 ;
 	
 	MyTimer_Base_Init (&TIMER4) ;
 	MyGPIO_Init (&BROCHE_PWM) ;
@@ -40,9 +40,10 @@ int main(void) {
 	
 	MyTimer_PWM (TIMER4.Timer, '1') ;
 	
-	PWM_Duty_Cycle (TIM4, 0.2, '1') ;
+	PWM_Duty_Cycle (TIM4, 0.3, '1') ;
 	
-	MyGPIO_Reset (PIN_SENS.GPIO, 2) ;
+	
+	
 	
 	/*MyTimer_ActiveIT (TIMER1.Timer, 1, SpeedUpdate) ;
 	
@@ -59,8 +60,8 @@ int main(void) {
 	
 	do {
 		
-		//for (i=0; i<10000000;i++){n++;}
-		
+		for (i=0; i<10000000;i++){n++;}
+		MyGPIO_Toggle (PIN_SENS.GPIO, 5) ;
 		
 	} while(1) ;
 }
