@@ -49,8 +49,9 @@ void MyUART_Init(USART_TypeDef * USART, USART_Mode_TypeDef Mode, float Baud_Rate
 int n = 0;
 char comp = 0;
 signed char comp_signed = 0;
+void* (gen_IRQHandler)(USART_TypeDef);
 
-void gen_IRQHandler(USART_TypeDef * USART){
+void gen_EXAMPLE_IRQHandler(USART_TypeDef * USART){
 	USART->SR &= ~USART_SR_RXNE ;
 	if(comp != USART->DR){
 		n++ ;
@@ -60,6 +61,9 @@ void gen_IRQHandler(USART_TypeDef * USART){
 }
 
 void USART1_IRQHandler(void){
+	if (gen_IRQHandler != 0){
+		(*pHandlerTim3) (); /* appel indirect de la fonction */
+	}
 	gen_IRQHandler(USART1);
 }
 
