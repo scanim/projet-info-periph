@@ -5,9 +5,16 @@
 #include "Driver_Servo.h"
 
 
-void SpeedUpdate (void) {
-	/*MyGPIO_Toggle (GPIOA, 2) ;
-	PWM_Duty_Cycle (TIM4, 10.0, '1') ;*/
+void SpeedUpdate (USART_TypeDef usart) {
+	int valeur = usart.DR ;
+	if (valeur>=0) {
+		MyGPIO_Set (GPIOB, 5) ;
+		PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
+	} else {
+		MyGPIO_Reset (GPIOB, 5) ;
+		PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
+	}
+	
 }
 
 int main(void) {	
