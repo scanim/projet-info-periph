@@ -1,6 +1,10 @@
 #include "MyUART.h"
 #include "stm32f10x.h"
 
+void (*pHandlerRX1) (void) ;
+void (*pHandlerRX2) (void) ;
+void (*pHandlerRX3) (void) ;
+
 void MyUART_Init(USART_TypeDef * USART, USART_Mode_TypeDef Mode, float Baud_Rate){
 	
 	USART->BRR = FREQ_CPU / Baud_Rate ; //baud USART3  = = = 4800?????
@@ -9,36 +13,6 @@ void MyUART_Init(USART_TypeDef * USART, USART_Mode_TypeDef Mode, float Baud_Rate
 		// Enable Receiver
 		USART->CR1 |= USART_CR1_RE;
 
-		// Enable interrupt on RXNE event
-		USART->CR1 |= USART_CR1_RXNEIE;
-		
-		// Enable USART
-		USART->CR1 |= USART_CR1_UE;
-
-		switch((int)USART) {
-			case (int)(USART1) :
-	//			// Enable USART clock
-	
-				NVIC_SetPriority(USART1_IRQn, 1);
-				NVIC_EnableIRQ(USART1_IRQn);
-				break;
-			
-			case (int)(USART2) : 
-
-				
-
-				NVIC_SetPriority(USART2_IRQn, 1);
-				
-				NVIC_EnableIRQ(USART2_IRQn);
-				break;
-			
-			case (int)(USART3) : 
-				
-				NVIC_SetPriority(USART3_IRQn, 1);
-				
-				NVIC_EnableIRQ(USART3_IRQn);
-				break;	
-		}
 	}
 	
 	if(Mode == TX){
@@ -46,33 +20,55 @@ void MyUART_Init(USART_TypeDef * USART, USART_Mode_TypeDef Mode, float Baud_Rate
 		USART->CR1 |= USART_CR1_TE ;
 	}
 }
-int n = 0;
-char comp = 0;
-signed char comp_signed = 0;
-void* (gen_IRQHandler)(USART_TypeDef);
 
-void gen_EXAMPLE_IRQHandler(USART_TypeDef * USART){
-	USART->SR &= ~USART_SR_RXNE ;
-	if(comp != USART->DR){
-		n++ ;
-		comp = USART->DR ; 
-		comp_signed = (signed char)comp;
-	}
+void MyUART_RX_ActiveIT(USART_TypeDef * USART, void (*IT_function) (void)){
+	
+	// Enable interrupt on RXNE event
+	USART->CR1 |= USART_CR1_RXNEIE;
+		
+	// Enable USART
+	USART->CR1 |= USART_CR1_UE;
+	
+	switch((int)USART) {
+			case (int)(USART1) :
+				pHandlerRX1 = IT_function ;
+				NVIC_SetPriority(USART1_IRQn, 1);
+				NVIC_EnableIRQ(USART1_IRQn);
+				break;
+			
+			case (int)(USART2) : 
+				pHandlerRX2 = IT_function ;
+				NVIC_SetPriority(USART2_IRQn, 1);
+				NVIC_EnableIRQ(USART2_IRQn);
+				break;
+			
+			case (int)(USART3) : 
+				pHandlerRX3 = IT_function ;
+				NVIC_SetPriority(USART3_IRQn, 1);
+				NVIC_EnableIRQ(USART3_IRQn);
+				break;	
+		}
 }
 
 void USART1_IRQHandler(void){
-	if (gen_IRQHandler != 0){
-		(*pHandlerTim3) (); /* appel indirect de la fonction */
+	USART1->SR &= ~USART_SR_RXNE ;
+	if (pHandlerRX1 != 0){
+		(*pHandlerRX1) ();
 	}
-	gen_IRQHandler(USART1);
 }
 
 void USART2_IRQHandler(void){
-	gen_IRQHandler(USART2); 
+	USART2->SR &= ~USART_SR_RXNE ;
+	if (pHandlerRX2 != 0){
+		(*pHandlerRX2) ();
+	}
 }
 
 void USART3_IRQHandler(void){
-	gen_IRQHandler(USART3); 
+	USART3->SR &= ~USART_SR_RXNE ;
+	if (pHandlerRX3 != 0){
+		(*pHandlerRX3) ();
+	}
 }
 
 void MyUART_Send(USART_TypeDef * USART, char * M, int len){
