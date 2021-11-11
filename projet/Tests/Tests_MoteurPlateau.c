@@ -3,6 +3,7 @@
 #include "MyTimer.h"
 #include "MyEncoder.h"
 #include "Driver_Servo.h"
+#include "MyUART.h"
 
 
 void SpeedUpdate (USART_TypeDef usart) {
@@ -19,14 +20,15 @@ void SpeedUpdate (USART_TypeDef usart) {
 
 int main(void) {	
 	
-	int i ;
-	int n=0 ;
+	/*int i ;
+	int n=0 ;*/
 	
 	MyTimer_Struct_TypeDef TIMER4 ;
 	MyGPIO_Struct_TypeDef BROCHE_PWM ;
 	MyGPIO_Struct_TypeDef PIN_SENS ;
+	MyGPIO_Struct_TypeDef GPIO_USART_RX = {GPIOA,10,ALTOUT_PPULL};
 	
-	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPAEN ;
+	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_USART1EN ;
 	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN ;
 	
 	TIMER4.ARR = 3600 ;
@@ -44,15 +46,18 @@ int main(void) {
 	MyTimer_Base_Init (&TIMER4) ;
 	MyGPIO_Init (&BROCHE_PWM) ;
 	MyGPIO_Init (&PIN_SENS) ;
+	MyGPIO_Init(&GPIO_USART_RX);
+	MyUART_Init(USART1, RX, 9600, SpeedUpdate);
 	
 	MyTimer_PWM (TIMER4.Timer, '1') ;
 	
 	
 	
 	
-	MyTimer_ActiveIT (TIMER1.Timer, 1, SpeedUpdate) ;
 	
-	MyTimer_Base_Init (&TIMER1) ;
+	/*MyTimer_ActiveIT (TIMER1.Timer, 1, SpeedUpdate) ;
+	
+	MyTimer_Base_Init (&TIMER1) */
 	
 	
 	
@@ -65,8 +70,8 @@ int main(void) {
 	
 	do {
 		
-		for (i=0; i<10000000;i++){n++;}
-		MyGPIO_Toggle (PIN_SENS.GPIO, 5) ;
+		/*for (i=0; i<10000000;i++){n++;}
+		MyGPIO_Toggle (PIN_SENS.GPIO, 5) ;*/
 		
 	} while(1) ;
 }

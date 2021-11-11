@@ -24,5 +24,4 @@ int main(){
 	while(1){
 		//MyUART_Send(USART3,test_string,7);
 	}
-	return 0;
 }
