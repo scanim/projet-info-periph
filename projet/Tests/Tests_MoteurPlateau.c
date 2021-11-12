@@ -5,14 +5,15 @@
 #include "Driver_Servo.h"
 #include "MyUART.h"
 
+signed char valeur = 0;
 
 void SpeedUpdate () {
-	int valeur = USART1->DR ;
+	valeur = USART1->DR ;
 	if (valeur>=0) {
-		MyGPIO_Set (GPIOB, 5) ;
+		MyGPIO_Reset (GPIOB, 5) ;
 		PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
 	} else {
-		MyGPIO_Reset (GPIOB, 5) ;
+		MyGPIO_Set (GPIOB, 5) ;
 		PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
 	}
 	
@@ -25,7 +26,7 @@ int main(void) {
 	MyTimer_Struct_TypeDef TIMER4 ;
 	MyGPIO_Struct_TypeDef BROCHE_PWM ;
 	MyGPIO_Struct_TypeDef PIN_SENS ;
-	MyGPIO_Struct_TypeDef GPIO_USART_RX = {GPIOA,10,ALTOUT_PPULL};
+	MyGPIO_Struct_TypeDef GPIO_USART_RX = {GPIOA,10,IN_PULLDOWN};
 	
 	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_USART1EN ;
 	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN ;
@@ -41,6 +42,7 @@ int main(void) {
 	PIN_SENS.GPIO = GPIOB ;
 	PIN_SENS.GPIO_Conf = OUT_PPULL ;
 	PIN_SENS.GPIO_Pin = 5 ;
+
 	
 	MyTimer_Base_Init (&TIMER4) ;
 	MyGPIO_Init (&BROCHE_PWM) ;
