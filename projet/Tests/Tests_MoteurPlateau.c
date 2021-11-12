@@ -6,8 +6,8 @@
 #include "MyUART.h"
 
 
-void SpeedUpdate (USART_TypeDef usart) {
-	int valeur = usart.DR ;
+void SpeedUpdate () {
+	int valeur = USART1->DR ;
 	if (valeur>=0) {
 		MyGPIO_Set (GPIOB, 5) ;
 		PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
@@ -47,10 +47,10 @@ int main(void) {
 	MyGPIO_Init (&BROCHE_PWM) ;
 	MyGPIO_Init (&PIN_SENS) ;
 	MyGPIO_Init(&GPIO_USART_RX);
-	MyUART_Init(USART1, RX, 9600, SpeedUpdate);
+	MyUART_Init(USART1, RX, 9600);
 	
 	MyTimer_PWM (TIMER4.Timer, '1') ;
-	
+	MyUART_RX_ActiveIT(USART1, SpeedUpdate);
 	
 	
 	
