@@ -10,18 +10,34 @@
 #define CHANNEL_PWM_SERVO '1'
 
 signed char valeur = 0;
+char sneg[14] = "Sens Horaire\n" ; 
+char spos[18] = "Sens Antihoraire\n" ; 
 
 void SpeedUpdate () {
-	valeur = USART1->DR ;
-	if (valeur>=0) {
-		MyGPIO_Reset (GPIOB, 5) ;
-		PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
-	} else {
-		MyGPIO_Set (GPIOB, 5) ;
-		PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
+	if(valeur != USART1->DR){  
+		valeur = USART1->DR ;
+		if (valeur>=0) {
+			MyGPIO_Reset (GPIOB, 5) ;
+			MyUART_TX_Send(USART3,sneg,13) ; 
+			PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
+		} else {
+			MyGPIO_Set (GPIOB, 5) ;
+			MyUART_TX_Send(USART3,spos,17) ; 
+			PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
+		}
 	}
-	
 }
+
+void Coucou () {
+	if (valeur>0) {
+			MyUART_TX_Send(USART3,sneg,13) ; 
+		} else if (valeur<0) {
+			MyUART_TX_Send(USART3,spos,17) ; 
+		} else {
+			MyUART_TX_Send(USART3,"Droit\n", 6);
+		}
+}
+
 int main(void) {	
 	
 	
@@ -38,10 +54,11 @@ int main(void) {
 	MyGPIO_Struct_TypeDef BROCHE_PWM ;
 	MyGPIO_Struct_TypeDef PIN_SENS ;
 	MyGPIO_Struct_TypeDef GPIO_USART_RX = {GPIOA,10,IN_PULLDOWN};
+	MyGPIO_Struct_TypeDef GPIO_USART_TX = {GPIOB,10,ALTOUT_PPULL};
 	
 	// On alimente les ponts
 	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_USART1EN | RCC_APB2ENR_IOPCEN | RCC_APB2ENR_TIM1EN ;
-	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN | RCC_APB1ENR_TIM2EN | RCC_APB1ENR_TIM3EN;
+	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN | RCC_APB1ENR_TIM2EN | RCC_APB1ENR_TIM3EN | RCC_APB1ENR_USART3EN ;
 	
 	timer1.ARR = INTERRUPT_SERVO_ARR ;
 	timer1.PSC = INTERRUPT_SERVO_PSC ;
@@ -93,10 +110,13 @@ int main(void) {
 	MyGPIO_Init (&BROCHE_PWM) ;
 	MyGPIO_Init (&PIN_SENS) ;
 	MyGPIO_Init(&GPIO_USART_RX);
+	MyGPIO_Init(&GPIO_USART_TX);
 	MyUART_Init(USART1, RX, 9600);
+	MyUART_Init(USART3, TX, 9600*2);
 
 	MyTimer_PWM (TIMER4.Timer, '1') ;
 	MyUART_RX_ActiveIT(USART1, SpeedUpdate);
+	MyTimer_ActiveIT (TIM4, 2, Coucou);
 	
 	
 	
