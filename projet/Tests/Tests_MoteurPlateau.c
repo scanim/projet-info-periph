@@ -8,15 +8,16 @@
 signed char valeur = 0;
 
 void SpeedUpdate () {
-	valeur = USART1->DR ;
-	if (valeur>=0) {
-		MyGPIO_Reset (GPIOB, 5) ;
-		PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
-	} else {
-		MyGPIO_Set (GPIOB, 5) ;
-		PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
+	if(valeur != USART1->DR){  
+		valeur = USART1->DR ;
+		if (valeur>=0) {
+			MyGPIO_Reset (GPIOB, 5) ;
+			PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
+		} else {
+			MyGPIO_Set (GPIOB, 5) ;
+			PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
+		}
 	}
-	
 }
 int main(void) {	
 	
