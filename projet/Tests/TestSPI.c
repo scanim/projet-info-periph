@@ -40,5 +40,4 @@ int main(){
 	MySPI_RX_ActiveIT(SPI1,EXAMPLE_IT_function);
 	
 	while(1);
-	return 0;
 }
