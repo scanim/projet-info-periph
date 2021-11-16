@@ -7,7 +7,6 @@
 #include "Bordage.h"
 
 #define PINGIROUETTE 4
-#define CHANNEL_PWM_SERVO '1'
 
 signed char valeur = 0;
 char sneg[14] = "Sens Horaire\n" ; 
@@ -16,14 +15,14 @@ char spos[18] = "Sens Antihoraire\n" ;
 void SpeedUpdate () {
 	if(valeur != USART1->DR){  
 		valeur = USART1->DR ;
-		if (valeur>=0) {
+		if (valeur<0) {
 			MyGPIO_Reset (GPIOB, 5) ;
 			MyUART_TX_Send(USART3,sneg,13) ; 
-			PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
+			PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
 		} else {
 			MyGPIO_Set (GPIOB, 5) ;
 			MyUART_TX_Send(USART3,spos,17) ; 
-			PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
+			PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
 		}
 	}
 }
@@ -102,21 +101,21 @@ int main(void) {
 	// Initialisations logicielles du bordage
 	MyTimer_Base_Init(&timer3);
 	MyTimer_Base_Init(&timer1);
-	//MyTimer_ActiveIT(TIM1, PRIO_INTERRUPT_BORDAGE, &Handler_Bordage);
-
-	//Bordage_Init(&timer3, &pin_servo, CHANNEL_PWM_SERVO, &Encoder);
-	
 	MyTimer_Base_Init (&TIMER4) ;
+
+	Bordage_Init(&timer3, &pin_servo, '1', &Encoder);
+	
 	MyGPIO_Init (&BROCHE_PWM) ;
 	MyGPIO_Init (&PIN_SENS) ;
 	MyGPIO_Init(&GPIO_USART_RX);
 	MyGPIO_Init(&GPIO_USART_TX);
+	
 	MyUART_Init(USART1, RX, 9600);
 	MyUART_Init(USART3, TX, 9600*2);
 
 	MyTimer_PWM (TIMER4.Timer, '1') ;
 	MyUART_RX_ActiveIT(USART1, SpeedUpdate);
-	MyTimer_ActiveIT (TIM4, 2, Coucou);
+	MyTimer_ActiveIT (TIM1, PRIO_INTERRUPT_BORDAGE, Handler_Bordage);
 	
 	
 	
