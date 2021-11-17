@@ -3,6 +3,14 @@
 
 #include "stm32f10x.h"
 
+/*
+	ADC12 PIN MAPPING ON STM32F103RB
+	PC0
+	PC1
+	PC2
+	PC3
+*/
+
 void MyADC_Init(ADC_TypeDef * ADC);
 void MyADC_ActiveIT( ADC_TypeDef * ADC, void (*IT_function) (void) ) ;
 void MyADC_ToggleConvert(ADC_TypeDef * ADC);
