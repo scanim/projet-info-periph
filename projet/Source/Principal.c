@@ -6,21 +6,21 @@
 #include "MyUART.h"
 #include "Bordage.h"
 #include "MyPin.h"
+#include "Orientation.h"
 
+MyTimer_Struct_TypeDef TIMER_PWM_SERVO;
+MyGPIO_Struct_TypeDef PIN_SERVO;
+char CHANNEL_PWM_SERVO;
+MyEncoder_Struct_TypeDef ENCODER;
 
-
-signed char valeur = 0;
-
-void SpeedUpdate () {
-	if(valeur != USART1->DR){  
-		valeur = USART1->DR ;
-		if (valeur<0) {
-			MyGPIO_Reset (GPIOB, 5) ;
-			PWM_Duty_Cycle (TIM4, (double)(valeur*(-1))/100.0, '1') ;
-		} else {
-			MyGPIO_Set (GPIOB, 5) ;
-			PWM_Duty_Cycle (TIM4, (double)(valeur)/100.0, '1') ;
-		}
+void Handler_Bordage(){
+	int mesure = (int)MyEncoder_getPosition(&ENCODER);
+	if ((0 <= mesure && mesure < 45) || (315 <= mesure && mesure < 360)){
+		Servo_Set_Angle(TIMER_PWM_SERVO, 0, CHANNEL_PWM_SERVO);
+	} else if (45 <= mesure && mesure < 180) {
+		Servo_Set_Angle(TIMER_PWM_SERVO, 0.6666666667*(mesure-45), CHANNEL_PWM_SERVO);
+	} else if (180 <= mesure && mesure < 315) {
+		Servo_Set_Angle(TIMER_PWM_SERVO, 0.6666666667*(315-mesure), CHANNEL_PWM_SERVO);
 	}
 }
 
@@ -28,76 +28,77 @@ int main(void) {
 	
 	
 	// Structures girouette
-	MyEncoder_Struct_TypeDef Encoder;
 	MyGPIO_Struct_TypeDef pin_girouette;
 	MyTimer_Struct_TypeDef compteur_AB;
 	// Structures Servo
-	MyGPIO_Struct_TypeDef pin_servo ;
-	MyTimer_Struct_TypeDef timer3 ;
 	MyTimer_Struct_TypeDef timer1 ;
 	// Structures Moteur Plateau et USART
-	MyTimer_Struct_TypeDef TIMER4 ;
-	MyGPIO_Struct_TypeDef BROCHE_PWM ;
-	MyGPIO_Struct_TypeDef PIN_SENS ;
-	MyGPIO_Struct_TypeDef GPIO_USART_RX = {GPIOA, GPIO_USART_PIN, IN_PULLDOWN};
+	MyTimer_Struct_TypeDef timer4 ;
+	MyGPIO_Struct_TypeDef pin_moteur ;
+	MyGPIO_Struct_TypeDef pin_sens_moteur ;
+	MyGPIO_Struct_TypeDef pin_usart_RX = {GPIOA, GPIO_USART_PIN, IN_PULLDOWN};
+	
+	CHANNEL_PWM_SERVO = '1';
 	
 	// On alimente les ponts
 	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_USART1EN | RCC_APB2ENR_IOPCEN | RCC_APB2ENR_TIM1EN ;
 	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN | RCC_APB1ENR_TIM2EN | RCC_APB1ENR_TIM3EN | RCC_APB1ENR_USART3EN ;
 	
+	// Timer interruption bordage (20ms)
 	timer1.ARR = INTERRUPT_SERVO_ARR ;
 	timer1.PSC = INTERRUPT_SERVO_PSC ;
 	timer1.Timer = TIM1 ;
 	
-	timer3.ARR = PWM_SERVO_ARR ;
-	timer3.PSC = PWM_SERVO_PSC ;
-	timer3.Timer = TIM3 ;
-	//TIM3 alternate function is linked to PA6
+	// Timer PWM servo
+	TIMER_PWM_SERVO.ARR = PWM_SERVO_ARR ;
+	TIMER_PWM_SERVO.PSC = PWM_SERVO_PSC ;
+	TIMER_PWM_SERVO.Timer = TIM3 ;
 	
-	TIMER4.ARR = PWM_PLATEAU_ARR ;
-	TIMER4.PSC = 1 ;
-	TIMER4.Timer = TIM4 ;
+	// Init pin Servo
+	PIN_SERVO.GPIO = GPIOA ;
+	PIN_SERVO.GPIO_Conf = ALTOUT_PPULL ;
+	PIN_SERVO.GPIO_Pin = GPIO_PIN_SERVO ;
 	
-	BROCHE_PWM.GPIO = GPIOB ;
-	BROCHE_PWM.GPIO_Conf = ALTOUT_PPULL ;
-	BROCHE_PWM.GPIO_Pin = 6 ;
+	// Timer PWM plateau
+	timer4.ARR = PWM_PLATEAU_ARR ;
+	timer4.PSC = 1 ;
+	timer4.Timer = TIM4 ;
 	
-	PIN_SENS.GPIO = GPIOB ;
-	PIN_SENS.GPIO_Conf = OUT_PPULL ;
-	PIN_SENS.GPIO_Pin = GPIO_PIN_SENS ;
+	pin_moteur.GPIO = GPIOB ;
+	pin_moteur.GPIO_Conf = ALTOUT_PPULL ;
+	pin_moteur.GPIO_Pin = 6 ; 
 	
-	// Init Servo
-	pin_servo.GPIO = GPIOA ;
-	pin_servo.GPIO_Conf = ALTOUT_PPULL ;
-	pin_servo.GPIO_Pin = GPIO_PIN_SERVO ;
+	pin_sens_moteur.GPIO = GPIOB ;
+	pin_sens_moteur.GPIO_Conf = OUT_PPULL ;
+	pin_sens_moteur.GPIO_Pin = GPIO_PIN_SENS ;
 	
-	// Init girouette
+	// Init pin girouette
 	pin_girouette.GPIO = GPIOA;
 	pin_girouette.GPIO_Conf = IN_PULLUP;
 	pin_girouette.GPIO_Pin = PINGIROUETTE;
 	
+	// Timer encoder girouette
 	compteur_AB.Timer = TIM2;
 	compteur_AB.ARR = ENCODER_ARR; //on compte les quarts de degré donc on remet à 0 tous les 1440 tics
 	compteur_AB.PSC = 1;
 
-	
-	Encoder.Encoder_I=&pin_girouette;
-	Encoder.struct_compteur_AB=&compteur_AB;
+	ENCODER.Encoder_I=&pin_girouette;
+	ENCODER.struct_compteur_AB=&compteur_AB;
 	
 	// Initialisations logicielles du bordage
-	MyTimer_Base_Init(&timer3);
+	MyTimer_Base_Init(&TIMER_PWM_SERVO);
 	MyTimer_Base_Init(&timer1);
-	MyTimer_Base_Init (&TIMER4) ;
+	MyTimer_Base_Init(&timer4) ;
 
-	Bordage_Init(&timer3, &pin_servo, '1', &Encoder);
+	Bordage_Init();
 	
-	MyGPIO_Init (&BROCHE_PWM) ;
-	MyGPIO_Init (&PIN_SENS) ;
-	MyGPIO_Init(&GPIO_USART_RX);
+	MyGPIO_Init(&pin_moteur) ;
+	MyGPIO_Init(&pin_sens_moteur) ;
+	MyGPIO_Init(&pin_usart_RX);
 	
 	MyUART_Init(USART1, RX, UART_BAUD_RATE);
 
-	MyTimer_PWM (TIMER4.Timer, '1') ;
+	MyTimer_PWM (timer4.Timer, '1') ;
 	MyUART_RX_ActiveIT(USART1, SpeedUpdate);
 	MyTimer_ActiveIT (TIM1, PRIO_INTERRUPT_BORDAGE, Handler_Bordage);
 	

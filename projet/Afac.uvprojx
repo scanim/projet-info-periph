@@ -474,6 +474,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\MySPI.c</FilePath>
             </File>
+            <File>
+              <FileName>Orientation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Orientation.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -513,6 +518,16 @@
               <FileName>MySPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\MySPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyPin.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\MyPin.h</FilePath>
+            </File>
+            <File>
+              <FileName>Orientation.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\Orientation.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1333,6 +1348,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\MySPI.c</FilePath>
             </File>
+            <File>
+              <FileName>Orientation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\Orientation.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1372,6 +1392,16 @@
               <FileName>MySPI.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Include\MySPI.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyPin.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\MyPin.h</FilePath>
+            </File>
+            <File>
+              <FileName>Orientation.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Include\Orientation.h</FilePath>
             </File>
           </Files>
         </Group>

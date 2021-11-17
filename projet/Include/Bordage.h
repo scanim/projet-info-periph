@@ -7,9 +7,6 @@
 #include "Driver_Servo.h"
 #include "MyEncoder.h"
 
-
-void Bordage_Init(MyTimer_Struct_TypeDef * timer, MyGPIO_Struct_TypeDef * pin_servo, char channel_pwm, MyEncoder_Struct_TypeDef * encoder);
-
-void Handler_Bordage(void);
+void Bordage_Init(void);
 
 #endif
