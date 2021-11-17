@@ -1,10 +1,10 @@
 #include "Bordage.h"
-
 #include "stm32f10x.h"
 #include "MyTimer.h"
 #include "Driver_GPIO.h"
 #include "Driver_Servo.h"
 #include "MyEncoder.h"
+
 
 // Variables globales qui seront utilisees dans le handler (on ne peut pas lui passer d'argument)
 MyTimer_Struct_TypeDef * TIMER_PWM_SERVO;
@@ -28,6 +28,8 @@ void Bordage_Init(MyTimer_Struct_TypeDef * timer, MyGPIO_Struct_TypeDef * pin_se
 	CHANNEL_PWM_SERVO = channel_pwm;
 	ENCODER = encoder;
 }
+
+
 
 extern void Handler_Bordage(){
 	int mesure = (int)MyEncoder_getPosition(ENCODER);

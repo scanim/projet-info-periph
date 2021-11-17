@@ -7,11 +7,6 @@
 #include "Driver_Servo.h"
 #include "MyEncoder.h"
 
-//expliquer choix ici
-#define INTERRUPT_SERVO_ARR 120
-#define INTERRUPT_SERVO_PSC 6000
-//mettre ça dans un .h propre
-#define PRIO_INTERRUPT_BORDAGE 4
 
 void Bordage_Init(MyTimer_Struct_TypeDef * timer, MyGPIO_Struct_TypeDef * pin_servo, char channel_pwm, MyEncoder_Struct_TypeDef * encoder);
 
