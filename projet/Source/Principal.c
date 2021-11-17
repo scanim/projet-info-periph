@@ -5,8 +5,9 @@
 #include "Driver_Servo.h"
 #include "MyUART.h"
 #include "Bordage.h"
+#include "MyPin.h"
 
-#define PINGIROUETTE 4
+
 
 signed char valeur = 0;
 
@@ -38,7 +39,7 @@ int main(void) {
 	MyTimer_Struct_TypeDef TIMER4 ;
 	MyGPIO_Struct_TypeDef BROCHE_PWM ;
 	MyGPIO_Struct_TypeDef PIN_SENS ;
-	MyGPIO_Struct_TypeDef GPIO_USART_RX = {GPIOA,10,IN_PULLDOWN};
+	MyGPIO_Struct_TypeDef GPIO_USART_RX = {GPIOA, GPIO_USART_PIN, IN_PULLDOWN};
 	
 	// On alimente les ponts
 	RCC->APB2ENR |= RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_USART1EN | RCC_APB2ENR_IOPCEN | RCC_APB2ENR_TIM1EN ;
@@ -53,7 +54,7 @@ int main(void) {
 	timer3.Timer = TIM3 ;
 	//TIM3 alternate function is linked to PA6
 	
-	TIMER4.ARR = 3600 ;
+	TIMER4.ARR = PWM_PLATEAU_ARR ;
 	TIMER4.PSC = 1 ;
 	TIMER4.Timer = TIM4 ;
 	
@@ -63,12 +64,12 @@ int main(void) {
 	
 	PIN_SENS.GPIO = GPIOB ;
 	PIN_SENS.GPIO_Conf = OUT_PPULL ;
-	PIN_SENS.GPIO_Pin = 5 ;
+	PIN_SENS.GPIO_Pin = GPIO_PIN_SENS ;
 	
 	// Init Servo
 	pin_servo.GPIO = GPIOA ;
 	pin_servo.GPIO_Conf = ALTOUT_PPULL ;
-	pin_servo.GPIO_Pin = 6 ;
+	pin_servo.GPIO_Pin = GPIO_PIN_SERVO ;
 	
 	// Init girouette
 	pin_girouette.GPIO = GPIOA;
@@ -76,7 +77,7 @@ int main(void) {
 	pin_girouette.GPIO_Pin = PINGIROUETTE;
 	
 	compteur_AB.Timer = TIM2;
-	compteur_AB.ARR = 4*360; //on compte les quarts de degré donc on remet à 0 tous les 1440 tics
+	compteur_AB.ARR = ENCODER_ARR; //on compte les quarts de degré donc on remet à 0 tous les 1440 tics
 	compteur_AB.PSC = 1;
 
 	
@@ -94,7 +95,7 @@ int main(void) {
 	MyGPIO_Init (&PIN_SENS) ;
 	MyGPIO_Init(&GPIO_USART_RX);
 	
-	MyUART_Init(USART1, RX, 9600);
+	MyUART_Init(USART1, RX, UART_BAUD_RATE);
 
 	MyTimer_PWM (TIMER4.Timer, '1') ;
 	MyUART_RX_ActiveIT(USART1, SpeedUpdate);

@@ -2,8 +2,9 @@
 #include "MyTimer.h"
 #include "stm32f10x.h"
 #include "MyEncoder.h"
+#include "MyPin.h"
 
-int initialized = 0; 
+int encoder_initialized = 0; 
 
 void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_Encoder) {
 	
@@ -40,7 +41,7 @@ void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_Encoder) {
 }
 
 void MyEncoder_findZero(void) {
-	while (initialized!=1);
+	while (encoder_initialized!=1);
 	TIM2->CNT = 0;
 	//initialized is set to 0 with an iterrupt when it goes through 0
 }
@@ -53,6 +54,6 @@ short MyEncoder_getPosition(MyEncoder_Struct_TypeDef * struct_encoder) {
 
 void EXTI4_IRQHandler(void) {
 	EXTI->PR |= ~(EXTI_PR_PR4); // release interrupt
-	initialized = 1 ;
+	encoder_initialized = 1 ;
 }
 
