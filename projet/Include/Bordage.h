@@ -9,7 +9,7 @@
 
 //expliquer choix ici
 #define INTERRUPT_SERVO_ARR 120
-#define INTERRUPT_SERVO_PSC 60000
+#define INTERRUPT_SERVO_PSC 6000
 //mettre ça dans un .h propre
 #define PRIO_INTERRUPT_BORDAGE 4
 
