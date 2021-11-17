@@ -3,9 +3,9 @@
 
 #include "Driver_GPIO.h"
 #include "MyTimer.h"
+#include "MyPin.h"
 
-#define PWM_SERVO_ARR 60000
-#define PWM_SERVO_PSC 24
+
 
 /*
 **************************************************************************************************
