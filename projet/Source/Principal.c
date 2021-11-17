@@ -13,6 +13,7 @@ MyGPIO_Struct_TypeDef PIN_SERVO;
 char CHANNEL_PWM_SERVO;
 MyEncoder_Struct_TypeDef ENCODER;
 
+
 void Handler_Bordage(){
 	int mesure = (int)MyEncoder_getPosition(&ENCODER);
 	if ((0 <= mesure && mesure < 45) || (315 <= mesure && mesure < 360)){
@@ -21,6 +22,10 @@ void Handler_Bordage(){
 		Servo_Set_Angle(TIMER_PWM_SERVO, 0.6666666667*(mesure-45), CHANNEL_PWM_SERVO);
 	} else if (180 <= mesure && mesure < 315) {
 		Servo_Set_Angle(TIMER_PWM_SERVO, 0.6666666667*(315-mesure), CHANNEL_PWM_SERVO);
+
+
+
+
 	}
 }
 
@@ -48,7 +53,6 @@ int main(void) {
 	timer1.ARR = INTERRUPT_SERVO_ARR ;
 	timer1.PSC = INTERRUPT_SERVO_PSC ;
 	timer1.Timer = TIM1 ;
-	
 	// Timer PWM servo
 	TIMER_PWM_SERVO.ARR = PWM_SERVO_ARR ;
 	TIMER_PWM_SERVO.PSC = PWM_SERVO_PSC ;
