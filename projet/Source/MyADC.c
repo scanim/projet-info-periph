@@ -3,9 +3,28 @@
 void (*pHandler_ADC1) (void) ;
 void (*pHandler_ADC2) (void) ;
 
-void MyADC_Init(ADC_TypeDef * ADC){
+void MyADC_Init(ADC_TypeDef * ADC, char port, int pin){
+	int channel ; 
 	ADC -> CR2 &= 0 ;
-	ADC -> CR2 |= ADC_CR2_ADON ; 
+	ADC -> CR2 |= ADC_CR2_ADON ;
+
+	if(port == 'A')
+	{
+		if(pin < 8)
+			channel = pin;
+	}
+	else if (port == 'B')
+	{
+		if(pin<2)
+			channel = 8 + pin;
+	}
+	else if (port == 'C')
+	{
+		if(pin<6)
+			channel = 10 + pin;
+	}
+	ADC -> SQR3 = channel ; 
+	
 }
 
 void MyADC_ActiveIT( ADC_TypeDef * ADC, void (*IT_function) (void) ){
@@ -23,15 +42,23 @@ void MyADC_ActiveIT( ADC_TypeDef * ADC, void (*IT_function) (void) ){
 	
 }
 
-void MyADC_ToggleConvert(ADC_TypeDef * ADC){
-	ADC -> CR2 ^= ADC_CR2_SWSTART ; 
+void MyADC_Start(ADC_TypeDef * ADC){
+	int i ; 
+	for(i = 0 ; i < 72000 ;  i++) ; 
+	ADC -> CR2 |= ADC_CR2_ADON ; 
+	ADC -> CR2 |= ADC_CR2_CONT ;
 }
+
+void MyADC_Stop(ADC_TypeDef * ADC){
+	ADC -> CR2 &= 0 ;
+}
+
 
 int MyADC_Read(ADC_TypeDef * ADC){
 	return ADC -> DR ;
 }
 
-void ADC_IRQHandler(void){
+void ADC1_2_IRQHandler(void){
 	
 	if( ADC1->SR != (ADC1->SR & ADC_SR_EOC) ){ //Checking which ADC called the handler
 		ADC1->SR &= ~ADC_SR_EOC ;
