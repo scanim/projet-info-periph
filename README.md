@@ -35,4 +35,6 @@ TIM2_CH1 et TIM2_CH2 -> A et B (Encoder)
 
 TIM3_CH1 -> Servo PWM
 
+TIM1_CH1 -> Interruption de bordage toutes les 10ms
+
 TIM4_CH1 -> Plateau PWM
