@@ -1,15 +1,15 @@
 #include "Driver_Servo.h"
 #include "stm32f10x.h"
 
-void Servo_Init (MyTimer_Struct_TypeDef timPWM, MyGPIO_Struct_TypeDef pinServo, char channel){
-	MyGPIO_Init (&pinServo) ;
-	MyTimer_PWM (timPWM.Timer, channel) ;
-	Servo_Set_Angle(timPWM, 0, channel) ;
+void Servo_Init (MyTimer_Struct_TypeDef * timPWM, MyGPIO_Struct_TypeDef * pinServo){
+	MyGPIO_Init (pinServo) ;
+	MyTimer_PWM (timPWM->Timer, CHANNEL_PWM_SERVO) ;
+	Servo_Set_Angle(timPWM, 0) ;
 }
 
-void Servo_Set_Angle (MyTimer_Struct_TypeDef timPWM, int angle, char channel) {
+void Servo_Set_Angle (MyTimer_Struct_TypeDef * timPWM, int angle) {
 	if (angle >= 0 && angle <= 90) {
-		PWM_Duty_Cycle (timPWM.Timer, (double)(0.05 + (double)(angle)*0.05/90.0), channel) ;
+		PWM_Duty_Cycle (timPWM->Timer, (double)(0.05 + (double)(angle)*0.05/90.0), CHANNEL_PWM_SERVO) ;
 	}
 }
 /*

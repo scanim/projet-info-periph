@@ -10,7 +10,7 @@ void MyUART_Init(USART_TypeDef * USART, USART_Mode_TypeDef Mode, float Baud_Rate
 	// Enable USART
 	USART->CR1 |= USART_CR1_UE;
 	
-	USART->BRR = FREQ_CPU / Baud_Rate ; //baud USART3  = = = 4800?????
+	USART->BRR = FREQ_CPU / Baud_Rate ;
 	
 	if(Mode == RX){
 		// Enable Receiver

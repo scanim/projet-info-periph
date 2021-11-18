@@ -1,35 +1,64 @@
 #ifndef MYPIN_H
 #define MYPIN_H
 
-// girouette et encodeur
-#define PINGIROUETTE 4
+// ENCODEUR GIROUETTE
+// on compte les quarts de degré donc on remet à 0 tous les 4*360=1440 tics
 #define ENCODER_ARR 1440
+#define ENCODER_PSC 1
 
-
-
-
-// servo-moteur
+// SERVOMOTEUR VOILES
 #define PWM_SERVO_ARR 60000
 #define PWM_SERVO_PSC 24
-#define INTERRUPT_SERVO_ARR 120
-#define INTERRUPT_SERVO_PSC 6000
-#define PWM_PLATEAU_ARR 3600
-#define GPIO_PIN_SENS 5
-#define GPIO_PIN_SERVO 6 //TIM3 alternate function is linked to PA6
+#define CHANNEL_PWM_SERVO '1'
+/* parametres timer d'interruption bordage :
+   Tinterrupt = 10ms et Fclock = 72MHz donc arr * psc = 7.2M */
+#define PRIO_INTERRUPT_BORDAGE 4
+#define INTERRUPT_SERVO_ARR 12
+#define INTERRUPT_SERVO_PSC 60000
 
+// MOTEUR PLATEAU
+#define PWM_PLATEAU_ARR 3600
 
 // USART
-#define PRIO_INTERRUPT_BORDAGE 4
-#define GPIO_USART_PIN 10
 #define UART_BAUD_RATE 9600
 
+
 //PINS
+/* !Other pins already taken!
+		A0 Encoder 'A'
+		A1 Encoder 'B'
+*/
+#define PIN_GIROUETTE_INIT {GPIOA, 4, IN_PULLUP}
 #define PIN_GIROUETTE_NUM 4
 #define PIN_GIROUETTE_GPIO GPIOA
+#define PIN_GIROUETTE_CONF IN_PULLUP
+
+#define PIN_SERVO_INIT {GPIOA, 6, ALTOUT_PPULL} //TIM3 alternate function is linked to PA6
 #define PIN_SERVO_NUM 6
 #define PIN_SERVO_GPIO GPIOA
-#define PIN_MOTEUR_NUM 
-#define PIN_SENS_MOTEUR_NUM
-#define PIN_USART_RX_NUM
+#define PIN_SERVO_CONF ALTOUT_PPULL
+
+#define PIN_MOTEUR_INIT {GPIOB, 6, ALTOUT_PPULL}
+#define PIN_MOTEUR_NUM 6
+#define PIN_MOTEUR_GPIO GPIOB
+#define PIN_MOTEUR_CONF ALTOUT_PPULL
+
+#define PIN_SENS_MOTEUR_INIT {GPIOB, 5, OUT_PPULL}
+#define PIN_SENS_MOTEUR_NUM 5
+#define PIN_SENS_MOTEUR_GPIO GPIOB
+#define PIN_SENS_MOTEUR_CONF OUT_PPULL
+
+#define PIN_USART_RX_INIT {GPIOA, 10, IN_PULLDOWN}
+#define PIN_USART_RX_NUM 10
+#define PIN_USART_RX_GPIO GPIOA
+#define PIN_USART_RX_CONF IN_PULLDOWN
+
+#define PIN_USART_TX_INIT {GPIOB, 10, ALTOUT_PPULL}
+#define PIN_USART_TX_NUM 10
+#define PIN_USART_TX_GPIO GPIOB
+#define PIN_USART_TX_CONF ALTOUT_PPULL
+
+//TIMERS
+
 
 #endif

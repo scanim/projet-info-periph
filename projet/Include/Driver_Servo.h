@@ -5,8 +5,6 @@
 #include "MyTimer.h"
 #include "MyPin.h"
 
-
-
 /*
 **************************************************************************************************
 * @brief
@@ -17,7 +15,7 @@
 * @Note : Init specified servo pin and PWM. TIMER IS NOT INITIALIZED
 **************************************************************************************************
 */
-void Servo_Init (MyTimer_Struct_TypeDef timPWM, MyGPIO_Struct_TypeDef pinServo, char channel);
+void Servo_Init (MyTimer_Struct_TypeDef * timPWM, MyGPIO_Struct_TypeDef * pinServo);
 
 /*
 **************************************************************************************************
@@ -29,6 +27,6 @@ void Servo_Init (MyTimer_Struct_TypeDef timPWM, MyGPIO_Struct_TypeDef pinServo, 
 * @Note : Servo_Init must have been launched
 **************************************************************************************************
 */
-void Servo_Set_Angle (MyTimer_Struct_TypeDef timPWM, int angle, char channel);
+void Servo_Set_Angle (MyTimer_Struct_TypeDef * timPWM, int angle);
 
 #endif

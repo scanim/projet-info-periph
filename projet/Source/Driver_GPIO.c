@@ -14,7 +14,6 @@ void MyGPIO_Init (MyGPIO_Struct_TypeDef * GPIOStructPtr){
 }
 
 
-
 // renvoie 0 ou autre chose different de 0
 int MyGPIO_Read (GPIO_TypeDef * GPIO , char GPIO_Pin){
 	

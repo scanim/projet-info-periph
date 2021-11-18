@@ -13,6 +13,7 @@ typedef struct{
 //Initiating timer and GPIO
 void MyEncoder_Init(MyEncoder_Struct_TypeDef * struct_encoder);
 
+// Blocks the programm while initialisation of the encoder isn't complete
 void MyEncoder_findZero(void);
 
 //Returns the encoder's timer counter
