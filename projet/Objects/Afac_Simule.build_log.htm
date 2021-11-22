@@ -21,29 +21,41 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.8.0
 Dialog DLL:      TARMSTM.DLL V1.66.0.0
  
 <h2>Project:</h2>
-U:\4A\infoMat\projetVoilier\projet-info-periph\projet\Afac.uvprojx
-Project File Date:  11/18/2021
+U:\Repositories\projet-info-periph\projet\Afac.uvprojx
+Project File Date:  11/19/2021
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'Réel'
 compiling Driver_GPIO.c...
-compiling MyUART.c...
 compiling MyEncoder.c...
-compiling Driver_Servo.c...
 compiling Bordage.c...
-compiling MyTimer.c...
-compiling Principal.c...
-Source\Principal.c(40): warning:  #177-D: variable "pin_usart_TX"  was declared but never referenced
-  	MyGPIO_Struct_TypeDef pin_usart_TX = PIN_USART_TX_INIT; //not used for now
-Source\Principal.c: 1 warning, 0 errors
-assembling startup_stm32f10x_md.s...
 compiling MySPI.c...
+compiling Driver_Servo.c...
+compiling MyTimer.c...
+compiling MyUART.c...
+assembling startup_stm32f10x_md.s...
 compiling Orientation.c...
+compiling MyADC.c...
+.\Include\MyADC.h(19): warning:  #1-D: last line of file ends without a newline
+  #endif
+Source\MyADC.c(80): warning:  #1-D: last line of file ends without a newline
+   
+Source\MyADC.c: 2 warnings, 0 errors
+compiling TensionBatterie.c...
+.\Include\MyADC.h(19): warning:  #1-D: last line of file ends without a newline
+  #endif
+Source\TensionBatterie.c: 1 warning, 0 errors
+compiling TestADC.c...
+.\Include\MyADC.h(19): warning:  #1-D: last line of file ends without a newline
+  #endif
+Tests\TestADC.c(37): warning:  #111-D: statement is unreachable
+  	return 0 ;
+Tests\TestADC.c: 2 warnings, 0 errors
 compiling system_stm32f10x.c...
 linking...
-Program Size: Code=3828 RO-data=308 RW-data=72 ZI-data=1024  
-".\Objects\Afac_Simule.axf" - 0 Error(s), 1 Warning(s).
+Program Size: Code=1304 RO-data=268 RW-data=64 ZI-data=1024  
+".\Objects\Afac_Simule.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -70,8 +82,8 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.4.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
       Source file:   Device\Source\ARM\STM32F1xx_OPT.s
+      Source file:   Device\Source\ARM\startup_stm32f10x_md.s
       Include file:  RTE_Driver\Config\RTE_Device.h
       Source file:   Device\Source\system_stm32f10x.c
 Build Time Elapsed:  00:00:02
